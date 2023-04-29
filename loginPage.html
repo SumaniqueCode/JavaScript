@@ -1,0 +1,62 @@
+<!-- Created on 2023/04/29
+By Suman Regmi -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login Page</title>
+    <script>
+        function validateform(){
+            let username = document.getElementById("userEmail").value;
+            let password = document.getElementById("userPassword").value;
+            if(username == "")
+            {
+                alert("Enter username first.")
+                return false;
+            }
+            else if (password=="")
+            {
+                    alert("Enter password.")
+                    return false;
+                }
+            else if(password.length<8)    
+            {
+                alert("Password must be al least 8 characters");
+                return false;
+            }
+            else
+            {
+                alert("Validation Successfull");
+                return true;
+            }
+        }
+    </script>
+    <style>
+        *{
+            margin: 10px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        #simpleForm{
+            box-sizing: border-box;
+            height: 200px;
+            width: 400px;
+            margin: 50px;
+            padding: 20px;
+            background: darkkhaki;
+        }
+    </style>
+</head>
+<body>
+    <form onsubmit=" return validateform()" id="simpleForm" action="https://limitlessplaying.blogspot.com/">
+        <label id="usernameLabel">Username: </label>
+        <input type="email" id="userEmail" name="userEmail" value = "" placeholder="Enter your username."><br>
+        <label id="passwordLabel">Password: </label>
+        <input type="password" id="userPassword" name="userPassword" value="" placeholder="Enter your password here."><br>
+        <button type="submit" id="submitButton" class="submitButton">SUBMIT</button>
+    </form>
+</body>
+</html>
