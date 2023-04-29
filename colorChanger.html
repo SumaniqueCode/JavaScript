@@ -1,0 +1,39 @@
+<!-- Created on 2023/04/29
+By Suman Regmi -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Changer</title>
+    <script>
+        let interval = setInterval(Changer, 1000);
+        function Changer(){
+            var colors =["red","blue","black","violet","yellow","green","white","grey","orange","pink","maroon", "brown", "indigo"];
+            var element = document.getElementById("colorChange");
+            var randomColor = colors[Math.floor(Math.random() * colors.length)];
+            element.style.backgroundColor = randomColor;
+        }
+    </script>
+    <style>
+        .colorChange{
+            height: 200px;
+            width: 200px;
+            margin: 50px;
+            padding: 20px;
+            box-sizing: border-box;
+            border: 4px solid darkslateblue;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="colorChange" id="colorChange" >
+        <h3>Color Changes every second.</h2>
+    </div>
+</body>
+</html>
