@@ -1,0 +1,98 @@
+<!-- Created on 2023/04/27
+By Suman Regmi -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arithmetic Calculator</title>
+    <script>
+
+function clearScreen() {
+document.getElementById("equation").innerHTML = "";
+document.getElementById("result").innerHTML = "";
+}
+function backspace(){
+    var bstring = document.getElementById("equation").innerHTML;
+    var dstring = bstring.substring(0, bstring.length-1);
+    document.getElementById("equation").innerHTML = dstring;
+}
+
+function display(value) {
+document.getElementById("equation").innerText += value;
+}
+
+function calculate() {
+var num = document.getElementById("equation").innerHTML;
+var calculatedResult = eval(num);
+document.getElementById("result").innerHTML = calculatedResult;
+}
+    </script>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        body{
+            margin: 20px;
+            padding: 20px;
+            font-size: xx-large;
+        }
+        button{
+            margin: 3px;
+            padding: 30px;
+            height: 60px;
+            width: 80px;
+            font-weight: bold;
+            font-size: medium;
+            text-align: center;
+            border: 3px solid darkslateblue;
+            border-radius: 10px;
+            background: greenyellow;
+        }
+        .buttons{
+            margin: 20px;
+        }
+        .resultarea{
+            width: 40%;
+            border: 3px solid darkslateblue;
+            border-radius: 10px;
+            background: aquamarine;
+            margin: 5px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="resultarea">
+        <label id="equation"></label><br>
+        <label id="result" class="result"></label><br>
+    </div>
+   <div class="buttons">
+    <button name="7" value="7" id ="" onclick="return display('7')"> 7 </button>
+    <button name="8" value="8" id ="" onclick="return display('8')"> 8 </button>
+    <button name="9" value="9" id ="" onclick="return display('9')"> 9 </button>
+    <button name="del"  id ="" onclick="return backspace()"> DEL </button>
+    <button name="ac"  id ="" onclick="return clearScreen()"> AC </button><br>
+    <button name="4" value="4" id ="" onclick="return display('4')"> 4 </button>
+    <button name="5" value="5" id ="" onclick="return display('5')"> 5 </button>
+    <button name="6" value="6" id ="" onclick="return display('6')"> 6 </button>
+    <button name="muntiply"  id ="muntiply" onclick="return display('*')"> x </button>
+    <button name="divide"  id ="divide" onclick="return display('/')"> / </button><br>
+    <button name="7" value="1" id ="" onclick="return display('1')"> 1 </button>
+    <button name="7" value="2" id ="" onclick="return display('2')"> 2 </button>
+    <button name="7" value="3" id ="" onclick="return display('3')"> 3 </button>
+    <button name="add"  id ="add" onclick="return display('+')"> + </button>
+    <button name="subtract"  id ="subtract" onclick="return display('-')"> - </button><br>
+    <button name="0" value="0" id ="" onclick="return display('0')"> 0 </button>
+    <button name="." value="." id ="" onclick="return display('.')"> . </button>
+    <button name="00" value="00" id ="" onclick="return display('&#40;')"> &#40; </button>
+    <button name="7"  id ="" onclick="return display('&#41')"> &#41; </button>
+    <button name="7"  id ="answer" onclick="return calculate()"> = </button><br>
+</div>
+</body>
+</html>
