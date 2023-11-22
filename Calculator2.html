@@ -1,0 +1,92 @@
+<!-- Created on 2023/05/07
+By Suman Regmi -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arithmetic Calculator</title>
+    <style>
+        * {
+            margin: 5px;
+            padding: 5px;
+        }
+
+        body {
+            margin: 20px;
+            padding: 20px;
+        }
+
+        button {
+            border: 2px solid skyblue;
+            border-radius: 3px;
+            width: max-content;
+            font-size: medium;
+        }
+        .calculator{
+            margin: auto;
+            background: lightgray;
+            width: 30%;
+        }
+        #result{
+            color: darkblue;
+            font-size: large;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        function calculate() {
+            let operation = document.getElementById("operation").value;
+            let num1 = parseFloat(document.getElementById("num1").value);
+            let num2 = parseFloat(document.getElementById("num2").value);
+            let calculatedResult;
+
+            switch (operation) {
+                case "+":
+                calculatedResult = num1 + num2;
+                    break;
+
+                case "-":
+                calculatedResult = num1 - num2;
+                    break;
+
+                case "*":
+                calculatedResult = num1 * num2;
+                    break;
+
+                case "/":
+                calculatedResult = num1 / num2;
+                    break;
+
+                default:
+                    alert("Enter the valid number.");
+                    break;
+            }
+
+            document.getElementById("result").innerHTML = calculatedResult;
+        }
+
+    </script>
+</head>
+
+<body>
+    <div class="calculator">
+        <label for="num1">Enter First Number:</label>
+        <input type="number" id="num1"><br>
+        <label for="num2">Enter Second Number:</label>
+        <input type="number" id="num2"><br>
+        <select id="operation">Select operation
+            <option value="+">ADD</option>
+            <option value="-">SUBTRACT</option>
+            <option value="*">MUNTIPLY</option>
+            <option value="/">DIVIDE</option>
+        </select><br>
+        <label for="">Result: </label><label for="result" id="result"></label><br>
+        <button type="submit" id="submit" onclick="return calculate()">SUBMIT</button>
+    </div>
+</body>
+
+</html>

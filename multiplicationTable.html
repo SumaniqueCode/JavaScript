@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplication Table</title>
+    <script>
+        function calculate(){
+            let num = document.getElementById('num').value;
+            let result ="";
+            for (let i = 1; i <=10; i++) {
+                result+= num + " * "+ i +" = "+ num*i + "<br>";
+                document.getElementById('calculatedResult').innerHTML = result;
+            }
+        }
+    </script>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        body{
+            margin: 40px;
+            padding: 20px;
+        }
+        #calculatedResult{
+            border: 2px solid darkblue;
+            width: 20%;
+            margin-top: 10px;
+            padding: 10px;
+            font-size: large;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Multiplication Table</h1>
+        <label for="number"><h4>Enter the number</h4></label>
+        <input type="number" id="num">
+        <button onclick="return calculate()">Calculate</button>
+        <p id="calculatedResult"></p>
+    </div>
+</body>
+</html>

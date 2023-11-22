@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+    <script>
+        function calculate() {
+            const DOB = new Date(document.getElementById("date").value);
+            const presentDate = new Date();
+            
+            let years = presentDate.getFullYear() - DOB.getFullYear();
+            let months = presentDate.getMonth() - DOB.getMonth();
+            let days = presentDate.getDate() - DOB.getDate();
+
+            // Check if the current date's month and day have already passed
+            if (months < 0 || (months === 0 && days < 0)) {
+                years--;
+                months += 12;
+            }
+
+            if (days < 0) {
+                const lastMonthDate = new Date(presentDate.getFullYear(), presentDate.getMonth(), 0);
+                days = lastMonthDate.getDate() - DOB.getDate() + presentDate.getDate();
+                months--;
+            }
+
+            document.getElementById("result").innerHTML = "Your age is " + years + " years, " + months + " months, and " + days + " days.";
+        }
+    </script>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        body{
+            margin: 40px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <label for="date">Enter Your Date Of Birth</label>
+    <input type="date" id="date"><br>
+    <button onclick="return calculate()">CALCULATE</button><br>
+    <label for="" id="result"></label>
+</body>
+</html>
