@@ -1,0 +1,210 @@
+ <!-- Created by Suman Regmi -->
+
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Limitless Playing</title>
+ </head>
+ <style>
+ 
+     *{
+         box-sizing: border-box;
+         margin: 0;
+         padding: 0;
+ 
+     }
+     .navigation{
+         display: flex;
+         width: 100%;
+         height: 40px;
+         background-color: cyan;
+         color: green;
+         padding: 10px;
+         margin-top: 10px;
+         justify-content: space-between;    
+         position: fixed;
+     }
+     .navigation img{
+         height: 55px;
+         width: 55px;
+         border-radius: 30px;
+         box-shadow: 5px 5px 2px black;
+     }
+     .navigation a{
+         color: maroon;
+         text-decoration: none;
+         padding: 10px;
+         margin: 0;
+     }
+     .navigation a:hover{
+         color: maroon;
+         text-decoration: none;
+         padding: 10px;
+         margin: 0;
+         background: white;
+         border-radius: 2px;
+     }
+     .screen{
+         display: grid;
+         grid-template-columns: repeat(5,1fr);
+         background-image: url(images/bg1.jpg);
+         background-repeat: no-repeat;
+         background-size: 1500px;
+         background-position: center;
+         padding: 30px;
+ 
+     }
+     .screen img{        
+         height: 200px;
+         width: 200px;
+         border-radius: 20px;  
+         box-shadow: 10px 10px 5px greenyellow;
+         margin: 30px; 
+         transition: 0.5s;
+     }
+     .screen img:hover{
+         transform: scale(1.2) rotate(10deg);
+     } 
+     .social{
+         color: red;
+         grid-column: 5/6;
+         grid-row: 1/2;
+     }
+     .popular{
+         color:blue;
+         grid-column: 5/6;
+         grid-row: 2/7;  
+         padding: 30px;      
+     }
+     .popular h2{
+         color: deeppink;
+     }
+     .social img{
+         box-sizing: border-box;
+         height: 65px;
+         width: 65px;
+         border-radius: 20px;
+         box-shadow: 10px 10px 5px aqua;
+         transition: 0.5s;
+     }
+     .social img:hover{
+         transform: scale3d(1.4,1.2,2);
+     }
+     .footer{
+         display: flex;
+         margin: 10px;
+         padding: 10px;
+         gap: 10px;
+         background-color: cyan;
+     }
+     .footer h1{
+         color: blueviolet;
+     }
+ </style>
+ <body>
+     <section class="navigation">
+         <div><img src="https://scontent.fbir1-1.fna.fbcdn.net/v/t39.30808-6/358713523_736124788520422_532573003273014307_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=efb6e6&_nc_ohc=ZuMIMpfxUbkAX9gB_Qy&_nc_ht=scontent.fbir1-1.fna&oh=00_AfA688DhYQtfsCXtVFW552ELFi2ulsvOLi8yxMO024-2LQ&oe=65C5BBF2" alt="logo">
+         </div>
+         <div>
+             <a href=""><b>Home</b></a>
+             <a href=""><b>About Us</b></a>
+             <a href=""><b>Contact Us</b></a>
+         </div>
+     </section>
+     <section class="image">
+         
+     </section>
+     <section class="screen">
+         <div>
+             <img src="https://images.pexels.com/photos/3937174/pexels-photo-3937174.jpeg?auto=compress&cs=tinysrgb&w=600" alt="">
+         </div>
+         <div>
+             <img src="https://images.pexels.com/photos/3568520/pexels-photo-3568520.jpeg?auto=compress&cs=tinysrgb&w=600" alt="">
+         </div>
+         <div>
+             <img src="https://images.pexels.com/photos/3937174/pexels-photo-3937174.jpeg?auto=compress&cs=tinysrgb&w=600" alt="">
+         </div>
+         <div>
+             <img src="https://images.pexels.com/photos/3568520/pexels-photo-3568520.jpeg?auto=compress&cs=tinysrgb&w=600" alt="">
+         </div>
+         <div>
+             <img src="https://images.pexels.com/photos/3937174/pexels-photo-3937174.jpeg?auto=compress&cs=tinysrgb&w=600" alt="">
+         </div>
+         <div>
+             <img src="https://images.pexels.com/photos/3568520/pexels-photo-3568520.jpeg?auto=compress&cs=tinysrgb&w=600" alt="">
+         </div>
+         <div>
+             <img src="https://images.pexels.com/photos/3937174/pexels-photo-3937174.jpeg?auto=compress&cs=tinysrgb&w=600" alt="">
+         </div>
+         <div>
+             <img src="https://images.pexels.com/photos/3568520/pexels-photo-3568520.jpeg?auto=compress&cs=tinysrgb&w=600" alt="">
+         </div>
+         <div class="social">
+            <a href="https://www.youtube.com/c/limitlessplaying2000/" target="_blank"><img src="https://static.vecteezy.com/system/resources/previews/023/986/480/original/youtube-logo-youtube-logo-transparent-youtube-icon-transparent-free-free-png.png" alt="youtube" ></a>
+             <a href="https://www.facebook.com/limitlessplaying" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Facebook_Logo_2023.png" alt="facebook"></a>
+             <a href="https://www.instagram.com/regmisuman_2000" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/2048px-Instagram_logo_2016.svg.png" alt="instagram"></a>
+             <a href="https://www.twitter.com/regmisuman_2000" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Logo_of_Twitter.svg/512px-Logo_of_Twitter.svg.png" alt="twitter"></a>
+             <a href="https://www.discord.com/" target="_blank"><img src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png" alt="discord"></a>
+             <a href="https://www.mail.google.com/" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Gmail_icon_%282020%29.svg/2560px-Gmail_icon_%282020%29.svg.png" alt="gmail"></a>
+         </div>
+         <div class="popular">
+             <ul>
+                 <li>
+                     <h1>List</h1>
+                     <h2>Description</h2>
+                 </li>
+                 <li>
+                     <h1>List</h1>
+                     <h2>Description</h2>
+                 </li>
+                 <li>
+                     <h1>List</h1>
+                     <h2>Description</h2>
+                 </li>
+                 <li>
+                     <h1>List</h1>
+                     <h2>Description</h2>
+                 </li>
+                 <li>
+                     <h1>List</h1>
+                     <h2>Description</h2>
+                 </li>
+                 <li>
+                     <h1>List</h1>
+                     <h2>Description</h2>
+                 </li>
+                 <li>
+                     <h1>List</h1>
+                     <h2>Description</h2>
+                 </li>
+                 <li>
+                     <h1>List</h1>
+                     <h2>Description</h2>
+                 </li>
+             </ul>
+         </div>
+     </section>
+     <section class="footer">
+     <div>
+         <h1>About Us</h1>
+         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti fugiat illum incidunt culpa quidem. 
+             Placeat earum reprehenderit voluptas aspernatur aliquam omnis, accusantium asperiores error ducimus obcaecati numquam a. Nam, voluptatum.</p>
+     </div>
+     <div>
+         <h1>Our Services</h1>
+         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perferendis blanditiis, amet dignissimos
+          incidunt labore in placeat reiciendis quidem ad soluta, aut vero. Sequi, facilis repudiandae maxime similique neque dolores placeat?</p>
+     </div>
+     <div>
+         <h1>Contact Us</h1>
+         <p>info@gmail.com
+             phone no: 980000000000
+             telephone  no: 025123454
+         </p>
+     </div>    
+     </section>
+ </body>
+ </html>
