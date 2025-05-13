@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Speech Assistant Pro</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+  <style>
+    *{
+      overflow: hidden;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+    .recording-pulse {
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+    .btn-transition {
+      transition: all 0.3s ease;
+    }
+    .btn-transition:active {
+      transform: scale(0.97);
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen flex items-center justify-center p-4">
+  <div class="bg-white shadow-2xl rounded-2xl p-4 w-full max-w-2xl space-y-1 border border-gray-100">
+    <div class="flex items-center justify-center gap-3">
+      <i class="fas fa-microphone text-2xl text-indigo-600"></i>
+      <h2 class="text-3xl font-bold text-center text-indigo-700">Speech Assistant Pro</h2>
+    </div>
+    <p class="text-center text-gray-500 -mt-5">Convert speech to text and text to speech with ease</p>
+    <!-- Speech to Text -->
+    <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
+      <div class="flex items-center mb-4">
+        <h3 class="text-xl font-semibold text-gray-800">Speech to Text</h3>
+        <div id="statusIndicator" class="ml-3 hidden">
+          <span class="recording-pulse inline-flex h-3 w-3 rounded-full bg-red-500"></span>
+          <span class="ml-2 text-sm text-red-500 font-medium"><i class="fas fa-microphone-alt mr-1"></i>Recording...</span>
+        </div>
+      </div>
+      <textarea id="recognizedText" placeholder="Your spoken words will appear here..." 
+        class="w-full p-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 resize-y min-h-[120px] text-gray-700"></textarea>
+      <div class="flex flex-wrap gap-4 mt-4">
+        <button id="startBtn" onclick="startListening()" class="flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-lg shadow-md btn-transition focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2">
+          <i class="fas fa-microphone"></i>
+          Start Listening
+        </button>
+        <button id="stopBtn" onclick="stopListening()" class="hidden flex items-center justify-center gap-2 bg-gray-600 hover:bg-gray-700 text-white px-5 py-2.5 rounded-lg shadow-md btn-transition focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2">
+          <i class="fas fa-stop-circle"></i>
+          Stop
+        </button>
+        <button onclick="resetText()" class="flex items-center justify-center gap-2 bg-red-500 hover:bg-red-600 text-white px-5 py-2.5 rounded-lg shadow-md btn-transition focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2">
+          <i class="fas fa-trash-alt"></i>
+          Reset
+        </button>
+        <button onclick="copyText()" class="flex items-center justify-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-5 py-2.5 rounded-lg shadow-md btn-transition focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2">
+          <i class="fas fa-copy"></i>
+          Copy
+        </button>
+      </div>
+    </div>
+    <!-- Text to Speech -->
+    <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-xl font-semibold text-gray-800">Text to Speech</h3>
+        <div id="speakingStatus" class="hidden">
+          <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+            <span class="recording-pulse mr-2 inline-block h-2 w-2 rounded-full bg-green-500"></span>
+            <i class="fas fa-volume-up mr-1"></i>Speaking...
+          </span>
+        </div>
+      </div>
+      <div class="space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:gap-4">
+          <label for="voices" class="text-gray-700 font-medium mb-2 sm:mb-0 sm:w-1/4">Voice:</label>
+          <select id="voices" class="flex-1 p-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:outline-none bg-white text-gray-700">
+            <!-- Populated by JS -->
+          </select>
+        </div>
+        <div class="flex flex-col sm:flex-row sm:items-center sm:gap-4">
+          <label for="rate" class="text-gray-700 font-medium mb-2 sm:mb-0 sm:w-1/4">Rate:</label>
+          <div class="flex-1 flex items-center gap-3">
+            <input type="range" id="rate" min="0.5" max="2" value="1" step="0.1" 
+              class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-indigo-600">
+            <span id="rateValue" class="text-gray-700 w-10 text-center">1.0</span>
+          </div>
+        </div>
+        <div class="flex flex-col sm:flex-row sm:items-center sm:gap-4">
+          <label for="pitch" class="text-gray-700 font-medium mb-2 sm:mb-0 sm:w-1/4">Pitch:</label>
+          <div class="flex-1 flex items-center gap-3">
+            <input type="range" id="pitch" min="0.5" max="2" value="1" step="0.1" 
+              class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-indigo-600">
+            <span id="pitchValue" class="text-gray-700 w-10 text-center">1.0</span>
+          </div>
+        </div>
+      </div>
+      <div class="flex gap-4 mt-6">
+        <button onclick="speakText()" class="flex-1 flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white px-5 py-2.5 rounded-lg shadow-md btn-transition focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2">
+          <i class="fas fa-volume-up"></i>
+          Speak
+        </button>
+        <button onclick="stopSpeaking()" class="flex items-center justify-center gap-2 bg-gray-500 hover:bg-gray-600 text-white px-5 py-2.5 rounded-lg shadow-md btn-transition focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2">
+          <i class="fas fa-stop"></i>
+          Stop
+        </button>
+      </div>
+    </div>
+    <footer class="text-center text-gray-500 text-sm mt-8">
+      <p>© 2025 Speech Assistant Pro by Limitless Inc• Version 1.0</p>
+    </footer>
+  </div>
+<script src="/speechAssistant.js"></script>
+</body>
+</html>
