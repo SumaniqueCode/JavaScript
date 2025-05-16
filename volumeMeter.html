@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Song Player with Volume Meter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .player-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    audio {
+      margin-right: 20px;
+    }
+
+    #meter {
+      width: 20px;
+      height: 100px;
+      background-color: #ddd;
+      border: 1px solid #333;
+      position: relative;
+      display: inline-block;
+    }
+
+    #fill {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background-color: green;
+      height: 50%;
+    }
+
+    #slider {
+      width: 300px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Select a Song</h2>
+
+  <!-- Song Selector -->
+  <select id="songSelect">
+    <option value="https://codeskulptor-demos.commondatastorage.googleapis.com/pang/paza-moduless.mp3">Mario Mix</option>
+    <option value="https://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Sevish_-__nbsp_.mp3">Hurry</option>
+    <option value="https://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Kangaroo_MusiQue_-_The_Neverwritten_Role_Playing_Game.mp3">Never Writter Role Play</option>
+  </select>
+
+  <!-- Audio Player and Meter -->
+  <div class="player-container">
+    <audio id="audio" controls>
+      <source id="audioSource" src="https://codeskulptor-demos.commondatastorage.googleapis.com/pang/paza-moduless.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+
+    <div id="meter">
+      <div id="fill"></div>
+    </div>
+  </div>
+
+  <!-- Volume Slider -->
+  <input type="range" id="slider" min="0" max="100" value="50">
+
+  <script>
+    const audio = document.getElementById('audio');
+    const audioSource = document.getElementById('audioSource');
+    const slider = document.getElementById('slider');
+    const fill = document.getElementById('fill');
+    const songSelect = document.getElementById('songSelect');
+
+    // Initial volume setup
+    audio.volume = 0.5;
+
+    // Update volume and meter
+    slider.addEventListener('input', function () {
+      const vol = this.value / 100;
+      audio.volume = vol;
+      fill.style.height = (vol * 100) + '%';
+    });
+
+    // Change song on dropdown selection
+    songSelect.addEventListener('change', function () {
+      audioSource.src = this.value;
+      audio.load();
+      audio.play();
+    });
+  </script>
+
+</body>
+</html>
