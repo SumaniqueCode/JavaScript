@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Name the Sound</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #eef6fb;
+            text-align: center;
+            padding: 40px;
+            color: #333;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        #question {
+            font-size: 20px;
+            margin: 20px 0;
+        }
+
+        .choice-btn {
+            padding: 12px 25px;
+            font-size: 16px;
+            margin: 10px;
+            border: none;
+            border-radius: 8px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
+        .choice-btn:hover {
+            background-color: #0056b3;
+        }
+
+        #score {
+            font-size: 18px;
+            margin-top: 30px;
+        }
+
+        #startBtn,
+        #restartBtn {
+            padding: 12px 30px;
+            font-size: 18px;
+            margin-top: 20px;
+            background-color: #28a745;
+            border: none;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        #restartBtn {
+            display: none;
+        }
+
+        audio {
+            display: none;
+        }
+
+        #feedback {
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+    </style>
+    <script>
+        const sounds = [
+  {
+    name: "Dog Bark",
+    file: "https://orangefreesounds.com/wp-content/uploads/2023/04/Single-dog-bark-sound-effect.mp3",
+    options: ["Cow Moo", "Dog Bark", "Cat Meow", "Pig Oink"]
+  },
+  {
+    name: "Fire Cracker",
+    file: "https://orangefreesounds.com/wp-content/uploads/2024/06/Firecracker-noise.mp3",
+    options: ["Gun Fire", "Wind Blowing", "Fire Cracker", "Rainfall"]
+  },
+  {
+    name: "Cat Meow",
+    file: "https://orangefreesounds.com/wp-content/uploads/2023/07/Original-cat-sound-meow.mp3",
+    options: ["Dog Bark", "Horse Neigh", "Cat Meow", "Goat Bleat"]
+  },
+  {
+    name: "Cow Moo",
+    file: "https://orangefreesounds.com/wp-content/uploads/2020/12/Mooing-sound-effect.mp3",
+    options: ["Elephant Trumpet", "Cow Moo", "Sheep Baa", "Lion Roar"]
+  },
+  {
+    name: "Rooster Crow",
+    file: "https://orangefreesounds.com/wp-content/uploads/2023/03/Rooster-crowing-3-times-sound-effect.mp3",
+    options: ["Cat Meow", "Rooster Crow", "Horse Neigh", "Duck Quack"]
+  },
+  {
+    name: "Ocean Waves",
+    file: "https://orangefreesounds.com/wp-content/uploads/2023/07/Ocean-waves-crashing-sound-effect.mp3",
+    options: ["Ocean Waves", "Thunder", "Rainfall", "River Flow"]
+  },
+  {
+    name: "Horse Neigh",
+    file: "https://orangefreesounds.com/wp-content/uploads/2023/01/Horse-neighing-sound.mp3",
+    options: ["Cow Moo", "Horse Neigh", "Pig Oink", "Dog Bark"]
+  },
+  {
+    name: "Pig Oink",
+    file: "https://orangefreesounds.com/wp-content/uploads/2014/10/Pig-oink-sounds.mp3",
+    options: ["Pig Oink", "Sheep Baa", "Dog Bark", "Cow Moo"]
+  },
+  {
+    name: "Sheep Baa",
+    file: "https://orangefreesounds.com/wp-content/uploads/2024/11/Sheep-baa-sound-effect.mp3",
+    options: ["Horse Neigh", "Goat Bleat", "Cow Moo", "Sheep Baa"]
+  },
+  {
+    name: "Thunder",
+    file: "https://orangefreesounds.com/wp-content/uploads/2025/05/Storm-sounds-realistic-rain-and-distant-thunder.mp3",
+    options: ["Rainfall", "Thunder", "Fire Cracker", "Wind Blowing"]
+  },
+  {
+    name: "Duck Quack",
+    file: "https://orangefreesounds.com/wp-content/uploads/2018/06/Duck-quacking-sound.mp3",
+    options: ["Chicken Cluck", "Rooster Crow", "Goose Honk", "Duck Quack"]
+  },
+  {
+    name: "Frog Croak",
+    file: "https://orangefreesounds.com/wp-content/uploads/2025/02/Frog-croak-sound-effect.mp3",
+    options: ["Bee Buzzing", "Frog Croak", "Cricket Chirp", "Bird Chirp"]
+  },
+  {
+    name: "Rainfall",
+    file: "https://orangefreesounds.com/wp-content/uploads/2025/05/Noisy-urban-street-during-rainfall-sound-effect.mp3",
+    options: ["Waterfall", "Wind Blowing", "Rainfall", "Thunder"]
+  },
+  {
+    name: "Bird Chirping",
+    file: "https://orangefreesounds.com/wp-content/uploads/2025/05/Blackbird-chirping-sound-effect.mp3",
+    options: ["Bird Chirping", "Frog Croak", "Cricket Chirp", "Crickets Chirping"]
+  },
+  {
+    name: "Bee Buzzing",
+    file: "https://orangefreesounds.com/wp-content/uploads/2015/03/Bumble-bee-sound.mp3",
+    options: ["Fly Buzzing", "Bee Buzzing", "Mosquito Buzzing", "Cricket Chirp"]
+  },
+  {
+    name: "Wind Blowing",
+    file: "https://orangefreesounds.com/wp-content/uploads/2015/03/Wind-blowing-sound-effect.mp3",
+    options: ["Rainfall", "Ocean Waves", "Wind Blowing", "Thunder"]
+  },
+  {
+    name: "Crickets Chirping",
+    file: "https://orangefreesounds.com/wp-content/uploads/2023/02/Crickets-chirping-sound.mp3",
+    options: ["Bird Chirping", "Bee Buzzing", "Crickets Chirping", "Frog Croak"]
+  },
+  {
+    name: "Lion Roar",
+    file: "https://orangefreesounds.com/wp-content/uploads/2024/03/Lion-roar-sound-effect.mp3",
+    options: ["Tiger Growl", "Cow Moo", "Elephant Trumpet", "Lion Roar"]
+  }
+];
+
+
+
+let score = 0;
+let currentIndex = 0;
+const audio = document.getElementById('sound');
+const choicesDiv = document.getElementById('choices');
+const scoreDiv = document.getElementById('score');
+const startBtn = document.getElementById('startBtn');
+const restartBtn = document.getElementById('restartBtn');
+const questionDiv = document.getElementById('question');
+
+startBtn.onclick = () => {
+    startBtn.style.display = 'none';
+    score = 0;
+    currentIndex = 0;
+    scoreDiv.textContent = "Score: 0";
+    loadQuestion();
+};
+
+restartBtn.onclick = () => {
+    restartBtn.style.display = 'none';
+    score = 0;
+    currentIndex = 0;
+    scoreDiv.textContent = "Score: 0";
+    loadQuestion();
+};
+
+function loadQuestion() {
+    const current = sounds[currentIndex];
+    questionDiv.textContent = "🎧 Listen to the sound and choose the correct answer:";
+    audio.src = current.file;
+    audio.load();
+    audio.play().catch(() => {
+        alert("Audio couldn't play. Click play manually.");
+    });
+
+    choicesDiv.innerHTML = "";
+    current.options.forEach(option => {
+        const btn = document.createElement("button");
+        btn.className = "choice-btn";
+        btn.textContent = option;
+        btn.onclick = () => checkAnswer(option);
+        choicesDiv.appendChild(btn);
+    });
+}
+
+function checkAnswer(answer) {
+    const feedbackDiv = document.getElementById('feedback');
+    if (answer === sounds[currentIndex].name) {
+        feedbackDiv.textContent = "Correct!";
+        feedbackDiv.style.color = "green";
+        score++;
+    } else {
+        feedbackDiv.textContent = "Wrong! Try again.";
+        feedbackDiv.style.color = "red";
+    }
+
+    scoreDiv.textContent = "Score: " + score;
+    currentIndex++;
+
+    if (currentIndex < sounds.length) {
+        loadQuestion();
+    } else {
+        questionDiv.textContent = "🎉 Quiz Finished!";
+        choicesDiv.innerHTML = "";
+        restartBtn.style.display = "inline-block";
+    }
+}
+
+    </script>
+</head>
+
+<body>
+    <h1>Name the Sound</h1>
+    <div id="question">Click "Start Quiz" to begin.</div>
+    <button id="startBtn">Start Quiz</button>
+    <audio id="sound"></audio>
+    <div id="choices"></div>
+    <div id="feedback"></div>
+    <div id="score">Score: 0</div>
+    <button id="restartBtn">Play Again</button>
+    <script src="nameTheSound.js"></script>
+</body>
+
+</html>
