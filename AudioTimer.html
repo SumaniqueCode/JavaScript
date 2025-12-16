@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Sound Timer</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .timer-box {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        text-align: center;
+        width: 300px;
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+        font-size: 18px;
+    }
+
+    button {
+        width: 100%;
+        margin-top: 15px;
+        padding: 10px;
+        background: #1a73e8;
+        color: white;
+        font-size: 18px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #1257b0;
+    }
+
+    #display {
+        margin-top: 20px;
+        font-size: 26px;
+        font-weight: bold;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="timer-box">
+    <h2>Sound Timer</h2>
+
+    <label>Set time (in seconds)</label>
+    <input type="number" id="secondsInput" placeholder="Enter seconds" />
+
+    <button onclick="startTimer()">Start Timer</button>
+
+    <div id="display">00:00</div>
+</div>
+
+<!-- Beep sound -->
+<audio id="beepSound">
+    <source src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg" type="audio/ogg">
+</audio>
+
+<script>
+let timerInterval;
+
+function startTimer() {
+    let seconds = parseInt(document.getElementById("secondsInput").value);
+    if (isNaN(seconds) || seconds <= 0) {
+        alert("Please enter a valid number of seconds.");
+        return;
+    }
+
+    clearInterval(timerInterval);
+
+    let display = document.getElementById("display");
+
+    timerInterval = setInterval(() => {
+        let min = Math.floor(seconds / 60);
+        let sec = seconds % 60;
+
+        display.textContent = 
+           (min < 10 ? "0" + min : min) + ":" +
+           (sec < 10 ? "0" + sec : sec);
+
+        if (seconds <= 0) {
+            clearInterval(timerInterval);
+            document.getElementById("beepSound").play();
+            display.textContent = "TIME UP!";
+        }
+
+        seconds--;
+    }, 1000);
+}
+</script>
+
+</body>
+</html>
